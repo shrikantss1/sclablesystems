@@ -34,7 +34,7 @@ public class PhotoController {
             @RequestParam(value = "tags[]", required = false) List<String> tags,
             @RequestParam(value = "caption", required = false) String caption) {
         Photo photo = photoService.upload(file, userId, timestamp, tags, caption);
-        PhotoResponse response = PhotoResponse.from(photo);
+        PhotoResponse response = PhotoResponse.from(photo, photoService.getImageUrl(photo));
         var location = ServletUriComponentsBuilder.fromCurrentRequest()
             .queryParam("userId", userId)
             .queryParam("photoId", photo.getId())
@@ -46,7 +46,7 @@ public class PhotoController {
         @GetMapping(params = "userId")
     public List<PhotoResponse> list(@RequestParam("userId") Long userId) {
         return photoService.findAllByUserId(userId).stream()
-                .map(PhotoResponse::from)
+            .map(photo -> PhotoResponse.from(photo, photoService.getImageUrl(photo)))
                 .toList();
     }
 

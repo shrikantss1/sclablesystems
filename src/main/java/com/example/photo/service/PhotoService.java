@@ -76,4 +76,11 @@ public class PhotoService {
         }
         return s3PhotoStorageService.read(photo.getS3Key());
     }
+
+    public String getImageUrl(Photo photo) {
+        if (photo.getS3Key() == null) {
+            return null;
+        }
+        return s3PhotoStorageService.createDownloadUrl(photo.getS3Key());
+    }
 }
