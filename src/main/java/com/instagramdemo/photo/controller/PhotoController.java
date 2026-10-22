@@ -1,8 +1,5 @@
-package com.example.photo.controller;
+package com.instagramdemo.photo.controller;
 
-import com.example.photo.dto.PhotoResponse;
-import com.example.photo.entity.Photo;
-import com.example.photo.service.PhotoService;
 import java.util.List;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
@@ -15,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.instagramdemo.photo.dto.PhotoResponse;
+import com.instagramdemo.photo.entity.Photo;
+import com.instagramdemo.photo.service.PhotoService;
 
 @RestController
 @RequestMapping("/api/photos")

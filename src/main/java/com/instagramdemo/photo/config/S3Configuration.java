@@ -1,4 +1,4 @@
-package com.example.photo.config;
+package com.instagramdemo.photo.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

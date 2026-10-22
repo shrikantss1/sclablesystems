@@ -1,8 +1,9 @@
-package com.example.photo.dto;
+package com.instagramdemo.photo.dto;
 
-import com.example.photo.entity.Photo;
 import java.time.Instant;
 import java.util.List;
+
+import com.instagramdemo.photo.entity.Photo;
 
 public record PhotoResponse(
         Long id,

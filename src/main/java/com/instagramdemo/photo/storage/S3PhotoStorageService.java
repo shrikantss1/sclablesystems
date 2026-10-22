@@ -1,4 +1,4 @@
-package com.example.photo.storage;
+package com.instagramdemo.photo.storage;
 
 import java.util.UUID;
 import java.time.Duration;

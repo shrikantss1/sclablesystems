@@ -1,4 +1,4 @@
-package com.example.photo.entity;
+package com.instagramdemo.photo.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.CollectionTable;

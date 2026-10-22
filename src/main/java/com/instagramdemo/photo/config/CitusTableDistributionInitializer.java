@@ -1,4 +1,4 @@
-package com.example.photo.config;
+package com.instagramdemo.photo.config;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

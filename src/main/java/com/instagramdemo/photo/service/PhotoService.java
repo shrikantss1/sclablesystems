@@ -1,8 +1,5 @@
-package com.example.photo.service;
+package com.instagramdemo.photo.service;
 
-import com.example.photo.entity.Photo;
-import com.example.photo.repository.PhotoRepository;
-import com.example.photo.storage.S3PhotoStorageService;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -11,6 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.instagramdemo.photo.entity.Photo;
+import com.instagramdemo.photo.repository.PhotoRepository;
+import com.instagramdemo.photo.storage.S3PhotoStorageService;
 
 @Service
 public class PhotoService {
