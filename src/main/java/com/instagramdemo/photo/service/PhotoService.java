@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.instagramdemo.photo.dto.PhotoResponse;
 import com.instagramdemo.photo.entity.Photo;
 import com.instagramdemo.photo.repository.PhotoRepository;
 import com.instagramdemo.photo.storage.S3PhotoStorageService;
@@ -24,6 +28,7 @@ public class PhotoService {
         this.s3PhotoStorageService = s3PhotoStorageService;
     }
 
+    @CacheEvict(cacheNames = "photos", key = "#userId")
     public Photo upload(MultipartFile file, Long userId, Instant timestamp, List<String> tags, String caption) {
         if (file.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Photo file must not be empty");
@@ -62,8 +67,12 @@ public class PhotoService {
         }
     }
 
-    public List<Photo> findAllByUserId(Long userId) {
-        return photoRepository.findAllByUserIdOrderByTimestampDesc(userId);
+    // Caches DTOs, not entities. TTL (10m) must stay below the presigned URL lifetime (15m).
+    @Cacheable(cacheNames = "photos", key = "#userId")
+    public List<PhotoResponse> findAllByUserId(Long userId) {
+        return photoRepository.findAllByUserIdOrderByTimestampDesc(userId).stream()
+                .map(photo -> PhotoResponse.from(photo, getImageUrl(photo)))
+                .toList();
     }
 
     public Photo findByIdAndUserId(Long id, Long userId) {

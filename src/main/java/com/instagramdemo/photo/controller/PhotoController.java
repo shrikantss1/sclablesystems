@@ -46,9 +46,7 @@ public class PhotoController {
 
         @GetMapping(params = "userId")
     public List<PhotoResponse> list(@RequestParam("userId") Long userId) {
-        return photoService.findAllByUserId(userId).stream()
-            .map(photo -> PhotoResponse.from(photo, photoService.getImageUrl(photo)))
-                .toList();
+        return photoService.findAllByUserId(userId);
     }
 
         @GetMapping(params = {"userId", "photoId"})
